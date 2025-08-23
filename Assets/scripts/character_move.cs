@@ -51,12 +51,12 @@ public class character_move : MonoBehaviour
         {
             rb.gravityScale = gravity * 1.5f;
         }
-        //if (rb.velocity.y == 0)
-        //{
-        //    rb.gravityScale = gravity;
-        //}
+        if (rb.velocity.y == 0)
+        {
+            rb.gravityScale = gravity;
+        }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         
         if (collision.gameObject.CompareTag("ground"))

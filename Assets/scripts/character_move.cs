@@ -10,8 +10,11 @@ public class character_move : MonoBehaviour
     private bool ONground;
     private bool double_jump;
     private float gravity;
+    private int in_jump = 1;
+    private Animator animator;
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         ONground = true;
         double_jump = false;
@@ -30,7 +33,7 @@ public class character_move : MonoBehaviour
         {
             Debug.Log("jump");
             
-
+            character_speed = 5;
             rb.velocity = new Vector2(rb.velocity.x, 8);
             rb.gravityScale = gravity;
             if (double_jump)
@@ -43,7 +46,7 @@ public class character_move : MonoBehaviour
             {
                 double_jump = true;
                 ONground = false;
-                
+               animator.SetTrigger("pipe attack");
             }
 
         }
@@ -53,7 +56,8 @@ public class character_move : MonoBehaviour
         }
         if (rb.velocity.y == 0)
         {
-            rb.gravityScale = gravity;
+            rb.gravityScale = gravity; 
+            character_speed = 20;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

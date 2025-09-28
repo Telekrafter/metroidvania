@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class character_move : MonoBehaviour
 {
-    public float character_speed = 20f;
+    private float character_speed = 10f;
+    private float speed;
     private float horizontal;
     Rigidbody2D rb;
     private bool ONground;
@@ -12,6 +13,7 @@ public class character_move : MonoBehaviour
     private float gravity;
     private int in_jump = 1;
     private Animator animator;
+    private bool is_attacking = false;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -19,6 +21,7 @@ public class character_move : MonoBehaviour
         ONground = true;
         double_jump = false;
         gravity = rb.gravityScale;
+        speed = character_speed;
 
     }
     void Update()
@@ -26,38 +29,47 @@ public class character_move : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         if (horizontal != 0)
         {
-            transform.Translate(new Vector3(horizontal, 0, 0) * Time.deltaTime * character_speed);
+            transform.Translate(new Vector3(horizontal, 0, 0) * Time.deltaTime * speed);
 
         }
         if (Input.GetButtonDown("Jump") && (ONground || double_jump))
         {
             Debug.Log("jump");
             
-            character_speed = 5;
-            rb.velocity = new Vector2(rb.velocity.x, 8);
+            speed = character_speed / 2;
+            rb.velocity = new Vector2(rb.velocity.x, 12);
             rb.gravityScale = gravity;
             if (double_jump)
             { 
                 double_jump = false;
-                rb.velocity = new Vector2(rb.velocity.x, 6);
+                rb.velocity = new Vector2(rb.velocity.x, 12);
 
             }
             if (ONground == true)
             {
                 double_jump = true;
                 ONground = false;
-               animator.SetTrigger("pipe attack");
+               
             }
+            
 
         }
+
+        if (Input.GetButtonDown("Fire1") && is_attacking == false)
+            { 
+                animator.SetTrigger("pipe attack");
+                is_attacking = true;
+                speed = 0;
+            }
+        
         if (rb.velocity.y < 0.1)
         {
             rb.gravityScale = gravity * 1.5f;
         }
-        if (rb.velocity.y == 0)
+        if (rb.velocity.y == 0 && is_attacking == false) 
         {
             rb.gravityScale = gravity; 
-            character_speed = 20;
+            speed = character_speed;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -68,5 +80,11 @@ public class character_move : MonoBehaviour
             ONground = true;
 
         }
+    }
+    public void Attacke()
+    {
+        is_attacking = false;
+        speed = character_speed;
+
     }
 }

@@ -14,6 +14,7 @@ public class character_move : MonoBehaviour
     private int in_jump = 1;
     private Animator animator;
     private bool is_attacking = false;
+    public static bool character_full_lock = false;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -26,6 +27,10 @@ public class character_move : MonoBehaviour
     }
     void Update()
     {
+        if (character_full_lock == true)
+        {
+            return;
+        }
         horizontal = Input.GetAxis("Horizontal");
         if (horizontal != 0)
         {
@@ -34,43 +39,50 @@ public class character_move : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump") && (ONground || double_jump))
         {
-            Debug.Log("jump");
             
-            speed = character_speed / 2;
-            rb.velocity = new Vector2(rb.velocity.x, 12);
-            rb.gravityScale = gravity;
+            
+           // speed = character_speed / 2;
+
+            //rb.gravityScale = gravity;
             if (double_jump)
             { 
                 double_jump = false;
-                rb.velocity = new Vector2(rb.velocity.x, 12);
+                rb.velocity = new Vector2(rb.velocity.x, 9);
 
             }
             if (ONground == true)
             {
                 double_jump = true;
                 ONground = false;
-               
+                rb.velocity = new Vector2(rb.velocity.x, 9);
             }
             
 
         }
 
         if (Input.GetButtonDown("Fire1") && is_attacking == false)
-            { 
+        { 
                 animator.SetTrigger("pipe attack");
                 is_attacking = true;
                 speed = 0;
-            }
-        
-        if (rb.velocity.y < 0.1)
-        {
-            rb.gravityScale = gravity * 1.5f;
         }
-        if (rb.velocity.y == 0 && is_attacking == false) 
+        if (rb.velocity.y < 0)
         {
-            rb.gravityScale = gravity; 
-            speed = character_speed;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + (Physics2D.gravity.y * 2 * Time.deltaTime));
         }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + (Physics2D.gravity.y * 2 * Time.deltaTime));
+        }
+        //if (rb.velocity.y < 0.1)
+        //{
+        //    rb.gravityScale = gravity * 1.5f;
+        //}
+        //if (rb.velocity.y == 0 && is_attacking == false) 
+        //{
+        //    rb.gravityScale = gravity; 
+        //    speed = character_speed;
+        //}
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

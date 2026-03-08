@@ -15,6 +15,8 @@ public class character_move : MonoBehaviour
     private Animator animator;
     private bool is_attacking = false;
     public static bool character_full_lock = false;
+    public float jump_speed = 9f;
+    public float double_jump_speed = 9f;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -44,19 +46,20 @@ public class character_move : MonoBehaviour
            // speed = character_speed / 2;
 
             //rb.gravityScale = gravity;
-            if (double_jump)
-            { 
-                double_jump = false;
-                rb.velocity = new Vector2(rb.velocity.x, 9);
-
-            }
+           
             if (ONground == true)
             {
                 double_jump = true;
                 ONground = false;
-                rb.velocity = new Vector2(rb.velocity.x, 9);
+                rb.velocity = new Vector2(rb.velocity.x, jump_speed);
             }
-            
+            else if(double_jump)
+            {
+                double_jump = false;
+                rb.velocity = new Vector2(rb.velocity.x, double_jump_speed);
+
+            }
+
 
         }
 
@@ -66,13 +69,19 @@ public class character_move : MonoBehaviour
                 is_attacking = true;
                 speed = 0;
         }
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < 0.5)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + (Physics2D.gravity.y * 2 * Time.deltaTime));
+            // rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + (Physics2D.gravity.y * 2 * Time.deltaTime));
+            rb.gravityScale = gravity * 2.5f;
         }
         else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + (Physics2D.gravity.y * 2 * Time.deltaTime));
+            //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + (Physics2D.gravity.y * 2 * Time.deltaTime));
+            rb.gravityScale = gravity * 4;
+        }
+        else
+        {
+            rb.gravityScale = gravity;
         }
         //if (rb.velocity.y < 0.1)
         //{

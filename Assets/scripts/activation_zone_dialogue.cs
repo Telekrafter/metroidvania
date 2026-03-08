@@ -10,8 +10,8 @@ public class activation_zone_dialogue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             dialogue_box.SetActive(true);
-            character_move.character_full_lock = true;
-            Debug.Log(character_move.character_full_lock);
+           
+            
         }
 
     }

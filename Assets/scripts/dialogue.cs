@@ -10,7 +10,7 @@ public class dialogue : MonoBehaviour
     public string[] lines;
     public float text_speed;
     private int index;
-    void On_Enable()
+    void OnEnable()
     {
        
         Text_component.text = string.Empty;
@@ -39,7 +39,9 @@ public class dialogue : MonoBehaviour
      void Start_Dialogue()
      {
         index = 0;
+        Debug.Log(character_move.character_full_lock);
         character_move.character_full_lock = true;
+        Debug.Log(character_move.character_full_lock);
         StartCoroutine(type());
      }
      IEnumerator type()

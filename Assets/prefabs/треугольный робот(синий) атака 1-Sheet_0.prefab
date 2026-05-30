@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3204291356152198629}
   - component: {fileID: 1000650600234913181}
   - component: {fileID: -6608851200959639912}
+  - component: {fileID: 8617183877940691966}
   m_Layer: 0
   m_Name: "\u0442\u0440\u0435\u0443\u0433\u043E\u043B\u044C\u043D\u044B\u0439 \u0440\u043E\u0431\u043E\u0442(\u0441\u0438\u043D\u0438\u0439)
     \u0430\u0442\u0430\u043A\u0430 1-Sheet_0"
@@ -172,3 +173,20 @@ PolygonCollider2D:
       - {x: 0.6977539, y: -0.4706869}
       - {x: 0.8808075, y: -0.075}
       - {x: 0.8572594, y: 0.5396778}
+--- !u!114 &8617183877940691966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3204291356152198628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc07bea07deb77c4085586847d215328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_position: {fileID: 0}
+  B_T_R_speed: 0
+  attack_range: 0
+  aggro_range: 0
+  attack_cd: 0

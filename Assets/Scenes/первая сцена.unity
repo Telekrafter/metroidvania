@@ -1017,6 +1017,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1000650600234913181, guid: fa8a694544d11204bb902556b747031c, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3204291356152198627, guid: fa8a694544d11204bb902556b747031c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1066,6 +1070,18 @@ PrefabInstance:
       value: "\u0442\u0440\u0435\u0443\u0433\u043E\u043B\u044C\u043D\u044B\u0439
         \u0440\u043E\u0431\u043E\u0442(\u0441\u0438\u043D\u0438\u0439) \u0430\u0442\u0430\u043A\u0430
         1-Sheet_0"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617183877940691966, guid: fa8a694544d11204bb902556b747031c, type: 3}
+      propertyPath: B_T_R_speed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617183877940691966, guid: fa8a694544d11204bb902556b747031c, type: 3}
+      propertyPath: aggro_range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617183877940691966, guid: fa8a694544d11204bb902556b747031c, type: 3}
+      propertyPath: attack_range
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa8a694544d11204bb902556b747031c, type: 3}

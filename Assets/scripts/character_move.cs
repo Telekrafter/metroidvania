@@ -17,6 +17,9 @@ public class character_move : MonoBehaviour
     public static bool character_full_lock = false;
     public float jump_speed = 9f;
     public float double_jump_speed = 9f;
+
+    private int hp_now;
+    private int hp_max = 5;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -25,6 +28,7 @@ public class character_move : MonoBehaviour
         double_jump = false;
         gravity = rb.gravityScale;
         speed = character_speed;
+        hp_now = hp_max;
 
     }
     void Update()
@@ -106,6 +110,20 @@ public class character_move : MonoBehaviour
     {
         is_attacking = false;
         speed = character_speed;
+
+    }
+    public void take_damage(int damage_to_player)
+    {
+        hp_now = hp_now - damage_to_player;
+        if (hp_now <= 0)
+        {
+            dead();
+        }
+        
+
+    }
+    private void dead()
+    {
 
     }
 }

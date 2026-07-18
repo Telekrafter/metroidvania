@@ -130,7 +130,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!60 &-6608851200959639912
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -186,7 +186,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_position: {fileID: 0}
-  B_T_R_speed: 0
+  B_T_R_speed: 15
   attack_range: 0
-  aggro_range: 0
-  attack_cd: 0
+  aggro_range: 8
+  dash_time: 0.75
+  attack_time: 0
+  knock_cd: 2

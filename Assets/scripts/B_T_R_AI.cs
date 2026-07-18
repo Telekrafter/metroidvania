@@ -9,12 +9,15 @@ public class B_T_R_AI : MonoBehaviour
     public float attack_range;
     public float aggro_range;
 
-    private float last_attack_time;
     private bool is_attacking = false;
-    public float knock_cd;
     private bool is_aggr = false;
     private bool is_dash;
-    private float dash_time;
+    public float dash_time;
+    public float attack_time;
+    public float knock_cd;
+    private float last_dash_time;
+    private float last_attack_time;
+    private float last_knock_time;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -28,12 +31,21 @@ public class B_T_R_AI : MonoBehaviour
    
     void Update()
     {
+       
+
         if (is_dash == true)
         {
-            
-
+            if (last_dash_time + dash_time <= Time.time)
+            {
+                is_dash = false;
+                rb.velocity = Vector2.zero;
+                last_knock_time = Time.time;
+                attack();
+            }
+            return;
         }
-        float distance_to_player = Vector2.Distance(transform.position, player_position.position);
+     
+            float distance_to_player = Vector2.Distance(transform.position, player_position.position);
         if (aggro_range >= distance_to_player)
         {
             is_aggr = true;
@@ -47,13 +59,14 @@ public class B_T_R_AI : MonoBehaviour
             }
             else if (is_aggr == true)
             {
-                move();
+                dash();
             }
 
 
         }
         
-        
+
+
 
 
     }
@@ -63,12 +76,14 @@ public class B_T_R_AI : MonoBehaviour
         last_attack_time = Time.time;
         Debug.Log("atck");
     }
-    private void move()
+    private void dash()
     {
+        Debug.Log("dash");
         is_dash = true;
         Vector2 direction = (player_position.position - transform.position).normalized;
         rb.velocity = direction * B_T_R_speed;
-        attack();
+        last_dash_time = Time.time;
+
 
 
     }

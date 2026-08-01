@@ -32,7 +32,10 @@ public class B_T_R_AI : MonoBehaviour
    
     void Update()
     {
-       
+       if (last_knock_time + knock_cd  >= Time.time)
+        {
+            return;
+        }
 
         if (is_dash == true)
         {
@@ -41,7 +44,7 @@ public class B_T_R_AI : MonoBehaviour
                 is_dash = false;
                 rb.velocity = Vector2.zero;
                 last_knock_time = Time.time;
-                attack();
+                
             }
             return;
         }
@@ -58,7 +61,7 @@ public class B_T_R_AI : MonoBehaviour
             {
                 attack();
             }
-            else if (is_aggr == true)
+            else if (is_aggr == true && is_dash == false)
             {
                 dash();
             }
@@ -80,6 +83,7 @@ public class B_T_R_AI : MonoBehaviour
     }
     private void dash()
     {
+       
         Debug.Log("dash");
         is_dash = true;
         Vector2 direction = (player_position.position - transform.position).normalized;

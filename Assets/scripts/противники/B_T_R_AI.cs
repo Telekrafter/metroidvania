@@ -18,7 +18,7 @@ public class B_T_R_AI : MonoBehaviour
     private float last_dash_time;
     private float last_attack_time;
     private float last_knock_time;
-    private character_move player_script;
+    private HP HP_script;
     private Rigidbody2D rb;
     private Animator animator;
     void Start()
@@ -26,7 +26,7 @@ public class B_T_R_AI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player_position = player.transform;
-        player_script = player.GetComponent<character_move>();
+        HP_script = player.GetComponent<HP>();
     }
 
    
@@ -79,7 +79,7 @@ public class B_T_R_AI : MonoBehaviour
         rb.velocity = Vector2.zero;
         last_attack_time = Time.time;
         Debug.Log("atck");
-        player_script.take_damage(1);
+        HP_script.take_damage(1);
     }
     private void dash()
     {
